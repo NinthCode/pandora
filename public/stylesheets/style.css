@@ -1,0 +1,79 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.clock {
+    width: 55%;
+    float: left;
+}
+
+.clock-fonts-color-size-date {
+    color: #ffffff;
+    font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    margin-bottom:20px;
+}
+
+.clock-fonts-color-size-hm {
+    color: #ffffff;
+    font: 80px "Lucida Grande", Helvetica, Arial, sans-serif;
+    float: left;
+}
+
+.clock-fonts-color-size-sec {
+    color: #ffffff;
+    font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    text-align: top;
+    margin-left:5px;
+    float: left;
+}
+
+.weather {
+    width: 45%;
+    float: left;
+}
+
+.weather-today {
+    color: #ffffff;
+    font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.welcome {
+    color: #ffffff;
+    position: absolute;
+    text-align: center;
+    top: 60%;
+    font: 70px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.news {
+    position: absolute;
+    text-align: center;
+    top: 85%;
+    margin-right: 10%;
+}
+
+h1.title {
+    color: #ffffff;
+    float: center;
+    text-align: center;
+    font-weight: 700;
+    font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+p.abstract {
+    color: #ffffff;
+    float: center;
+    text-align: center;
+    font-weight: 900;
+    font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}

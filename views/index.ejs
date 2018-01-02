@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div>
+      <div class="clock">
+        <div id="clock-date" class="clock-fonts-color-size-date">星期* ****年**月**日</div>
+        <div id="clock-hm" class="clock-fonts-color-size-hm">** : **</div>
+        <div id="clock-sec" class="clock-fonts-color-size-sec">**</div>
+      </div>
+
+      <div class="weather">
+        <div id="todaytemp" class="weather-today">*℃~*℃</div>
+        <div id="todayweather" class="weather-today">多云</div>
+        <div id="todaywind" class="weather-today">西北风 3-4级</div>
+        <div id="nowtemp" class="weather-today">实时温度：5℃（5分钟前更新）</div>
+        <div id="airstatus" class="weather-today">空气质量：优（30）</div>
+      </div>
+    </div>
+
+    <div class="welcome" id = "welcome">
+      你好，陌生人。
+    </div>
+
+    <div class="news" id = "news">
+      <h1 id="title" class="title"></h1>
+      <p id="abstract" class="abstract"></p>
+    </div>
+    
+    <!-- javascripts -->
+    <script src="//cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/socket.io/socket.io.js"></script>
+  </body>
+</html>

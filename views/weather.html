@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="result-op c-container" srcid="13031" fk="13031_北京天气" id="1" tpl="weather_time_2"
+     mu="http://www.weather.com.cn/weather/101010100.shtml" data-op="{'y':'FFDEF8FC'}"
+     data-click="{&quot;p1&quot;:&quot;1&quot;,&quot;rsv_bdr&quot;:&quot;0&quot;,&quot;fm&quot;:&quot;alop&quot;,&quot;rsv_stl&quot;:&quot;0&quot;,&quot;p5&quot;:1}"
+     style="position: relative;">
+
+    <style>
+
+
+        .op_weather4_twoicon {
+            width: 100%;
+            height: 250px;
+            position: relative;
+        }
+
+        .op_weather4_twoicon_bg {
+            width: 100%;
+            /* 默认展开，没有下拉图标所以高度 -20 px */
+            height: 250px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        /*----- 所有列 -----*/
+        .op_weather4_twoicon_day, .op_weather4_twoicon_today {
+            position: absolute;
+            width: 89px;
+            height: 250px;
+            text-decoration: none;
+            color: #fff;
+            border: none;
+            z-index: 20;
+            outline: none;
+        }
+
+        .op_weather4_twoicon p {
+            text-align: center;
+            font-size: 12px;
+            text-shadow: 1px 1px 1px #555;
+            line-height: 1em;
+        }
+
+        /* 日期 */
+        .op_weather4_twoicon_date {
+            margin-top: 56px;
+        }
+
+        .op_weather4_twoicon .op_weather4_twoicon_date_day {
+            margin-top: 8px;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+            text-shadow: none
+        }
+
+        /* 天气图标 */
+        .op_weather4_twoicon_icon {
+            width: 50px;
+            height: 50px;
+            background: no-repeat;
+            background-size: cover;
+            margin: 20px 0 0 20px;
+        }
+
+        .op_weather4_twoicon_temp {
+            margin-top: 22px;
+        }
+
+        .op_weather4_twoicon_weath {
+            z-index: 12;
+            margin-top: 12px;
+        }
+
+        .op_weather4_twoicon_wind {
+            margin-top: 11px;
+        }
+
+        /* 列表分隔竖线 */
+        .op_weather4_twoicon_split {
+            position: absolute;
+            left: 0px;
+            top: 58px;
+            width: 1px;
+            height: 180px;
+            background: #fff;
+
+            filter: alpha(opacity=15);
+            opacity: 0.15;
+        }
+
+        .op_weather4_twoicon_hover {
+            z-index: -1;
+            position: absolute;
+            width: 89px;
+            height: 250px;
+        }
+
+        .op_weather4_twoicon_day:hover .op_weather4_twoicon_hover {
+            background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, .015), rgba(255, 255, 255, .15));
+            background-image: -o-linear-gradient(top, rgba(255, 255, 255, .015), rgba(255, 255, 255, .15));
+            background-image: -ms-linear-gradient(top, rgba(255, 255, 255, .015), rgba(255, 255, 255, .15));
+            background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .015), rgba(255, 255, 255, .15));
+            filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr=#04FFFFFF, EndColorStr=#40FFFFFF);
+        }
+
+        /*----- 第一列天气 -----*/
+        .op_weather4_twoicon_today {
+            width: 186px;
+        }
+
+        .op_weather4_twoicon_today .op_weather4_twoicon_date {
+            text-align: left;
+            margin: 12px 0 0 12px;
+            width: 300px;
+        }
+
+        .op_weather4_twoicon_today .op_weather4_twoicon_icon {
+            width: 50px;
+            height: 50px;
+            margin: 8px 0 0 60px;
+        }
+
+        .op_weather4_twoicon_temp sup {
+            vertical-align: baseline;
+        }
+
+        .op_weather4_twoicon_shishi {
+            text-align: center;
+        }
+
+        .op_weather4_twoicon_shishi_info {
+            position: relative;
+        }
+
+        .op_weather4_twoicon_shishi_title {
+            font-size: 48px;
+            line-height: 64px;
+            display: inline-block;
+            font-family: Arial;
+            text-shadow: 1px 1px 1px #555;
+        }
+
+        .op_weather4_twoicon_shishi_data {
+            position: relative;
+            display: inline-block;
+        }
+
+        .op_weather4_twoicon_shishi_sup,
+        .op_weather4_twoicon_shishi_sub {
+            display: block;
+            text-align: left;
+            font-style: normal;
+            text-shadow: 1px 1px 1px #555;
+        }
+
+        .op_weather4_twoicon_today .op_weather4_twoicon_temp {
+            margin-top: 8px;
+        }
+
+        .op_weather4_twoicon .op_weather4_twoicon_pm25 {
+            margin-top: 8px;
+        }
+
+        .op_weather4_twoicon_pm25 b {
+
+        }
+
+        .op_weather4_twoicon_pm25 em {
+            display: inline-block;
+            margin-left: 5px;
+            width: 82px;
+            line-height: 18px;
+            height: 18px;
+            text-align: center;
+            font-size: 12px;
+            font-style: normal;
+            color: #fff;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+
+    </style>
+
+
+    <script>document.createElement("canvas");</script>
+    <h3 class="t c-gap-bottom-small"><a
+            href="https://www.baidu.com/link?url=oKSOUVe1GMIFn_smd2Wo9n4qiTnwOVi9_Ovbu_WuaVYyHt3iCoo2xYwcpA34W5isMu0BW3B5tjbdaLW5YUDBB_&amp;wd=&amp;eqid=c32b940c00021d01000000025a3646ce"
+            target="_blank">北京<em>天气</em>预报_一周<em>天气</em>预报_<em>中国天气网</em></a> <b class="op_weather4_twoicon_u"><i>-
+        最近访问：</i></b></h3>
+
+    <div class="op_weather4_twoicon_container_div">
+
+
+        <div class="op_weather4_twoicon" style="height: 404px;">
+
+
+            <a class="op_weather4_twoicon_today OP_LOG_LINK" target="_blank"
+               href="https://www.baidu.com/link?url=oKSOUVe1GMIFn_smd2Wo9n4qiTnwOVi9_Ovbu_WuaVYyHt3iCoo2xYwcpA34W5isMu0BW3B5tjbdaLW5YUDBB_&amp;wd=&amp;eqid=c32b940c00021d01000000025a3646ce"
+               data-click="{&quot;url&quot;:&quot;http://www.weather.com.cn/weather/101010100.shtml&quot;}"
+               weath-bg="evening" weath-eff="&quot;&quot;">
+                <p class="op_weather4_twoicon_date">
+
+
+                    12月17日 周日 农历十月三十&nbsp;
+                </p>
+                <p class="op_weather4_twoicon_date op_weather4_twoicon_pm25">实时空气质量:
+                    <em style="background:#afdb00"><b>53</b>&nbsp;良</em>
+                </p>
+
+
+                <div class="op_weather4_twoicon_shishi">
+                    <div class="op_weather4_twoicon_icon"
+                         style="background-image:url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/bigicon/2.png);*background:none;*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/bigicon/2.png,sizingMethod='scale')"></div>
+
+                    <div class="op_weather4_twoicon_shishi_info">
+                        <span class="op_weather4_twoicon_shishi_title">2</span>
+                        <span class="op_weather4_twoicon_shishi_data">
+                                <i class="op_weather4_twoicon_shishi_sup">℃</i>
+                                <i class="op_weather4_twoicon_shishi_sub">晴(实时)</i>
+                            </span>
+                    </div>
+
+
+                </div>
+
+
+                <p class="op_weather4_twoicon_temp">-5 ~ 5℃</p>
+                <p class="op_weather4_twoicon_weath" title="晴转晴间多云">
+
+                    晴转晴间多云
+
+                </p>
+                <p class="op_weather4_twoicon_wind">西南风微风</p>
+
+
+            </a>
+
+
+            <a class="op_weather4_twoicon_day OP_LOG_LINK" style="left:188px" target="_blank"
+               href="http://www.baidu.com/link?url=tUNcpWpyQBlt65-c0QK5rYrubREaJN5BzDrhG4YxUuXAaV8tBq3eFoaD9qnbXzgcH93aW7gCc0LrEzmL8qTH4_"
+               data-click="{&quot;url&quot;:&quot;http://www.weather.com.cn/weather/101010100.shtml#7d&quot;}"
+               weath-bg="daytime" weath-eff="{&quot;halo&quot;:1}">
+
+
+                <div class="op_weather4_twoicon_hover"></div>
+                <div class="op_weather4_twoicon_split"></div>
+                <p class="op_weather4_twoicon_date">
+
+
+                    周一
+                </p>
+
+
+                <p class="op_weather4_twoicon_date_day">12月18日</p>
+
+                <div class="op_weather4_twoicon_icon"
+                     style="background:url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/1.png);*background:none;*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/1.png,sizingMethod='scale')"></div>
+
+
+                <p class="op_weather4_twoicon_temp">-6 ~ 6℃</p>
+                <p class="op_weather4_twoicon_weath" title="晴">
+
+                    晴
+
+                </p>
+                <p class="op_weather4_twoicon_wind">西北风3-4级</p>
+
+
+            </a>
+
+
+            <a class="op_weather4_twoicon_day OP_LOG_LINK" style="left:276px" target="_blank"
+               href="http://www.baidu.com/link?url=tUNcpWpyQBlt65-c0QK5rYrubREaJN5BzDrhG4YxUuXAaV8tBq3eFoaD9qnbXzgcH93aW7gCc0LrEzmL8qTH4_"
+               data-click="{&quot;url&quot;:&quot;http://www.weather.com.cn/weather/101010100.shtml#7d&quot;}"
+               weath-bg="daytime" weath-eff="{&quot;halo&quot;:1}">
+
+
+                <div class="op_weather4_twoicon_hover"></div>
+                <div class="op_weather4_twoicon_split"></div>
+                <p class="op_weather4_twoicon_date">
+
+
+                    周二
+                </p>
+
+
+                <p class="op_weather4_twoicon_date_day">12月19日</p>
+
+                <div class="op_weather4_twoicon_icon"
+                     style="background:url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/5.png);*background:none;*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/5.png,sizingMethod='scale')"></div>
+
+
+                <p class="op_weather4_twoicon_temp">-5 ~ 4℃</p>
+                <p class="op_weather4_twoicon_weath" title="多云转阴">
+
+                    多云转阴
+
+                </p>
+                <p class="op_weather4_twoicon_wind">西南风微风</p>
+
+
+            </a>
+
+
+            <a class="op_weather4_twoicon_day OP_LOG_LINK" style="left:364px" target="_blank"
+               href="http://www.baidu.com/link?url=tUNcpWpyQBlt65-c0QK5rYrubREaJN5BzDrhG4YxUuXAaV8tBq3eFoaD9qnbXzgcH93aW7gCc0LrEzmL8qTH4_"
+               data-click="{&quot;url&quot;:&quot;http://www.weather.com.cn/weather/101010100.shtml#7d&quot;}"
+               weath-bg="daytime" weath-eff="{&quot;halo&quot;:1}">
+
+
+                <div class="op_weather4_twoicon_hover"></div>
+                <div class="op_weather4_twoicon_split"></div>
+                <p class="op_weather4_twoicon_date">
+
+
+                    周三
+                </p>
+
+
+                <p class="op_weather4_twoicon_date_day">12月20日</p>
+
+                <div class="op_weather4_twoicon_icon"
+                     style="background:url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/5.png);*background:none;*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/5.png,sizingMethod='scale')"></div>
+
+
+                <p class="op_weather4_twoicon_temp">-6 ~ 6℃</p>
+                <p class="op_weather4_twoicon_weath" title="多云转晴">
+
+                    多云转晴
+
+                </p>
+                <p class="op_weather4_twoicon_wind">北风微风</p>
+
+
+            </a>
+
+
+            <a class="op_weather4_twoicon_day OP_LOG_LINK" style="left:452px" target="_blank"
+               href="http://www.baidu.com/link?url=tUNcpWpyQBlt65-c0QK5rYrubREaJN5BzDrhG4YxUuXAaV8tBq3eFoaD9qnbXzgcH93aW7gCc0LrEzmL8qTH4_"
+               data-click="{&quot;url&quot;:&quot;http://www.weather.com.cn/weather/101010100.shtml#7d&quot;}"
+               weath-bg="daytime" weath-eff="{&quot;halo&quot;:1}">
+
+
+                <div class="op_weather4_twoicon_hover"></div>
+                <div class="op_weather4_twoicon_split"></div>
+                <p class="op_weather4_twoicon_date">
+
+
+                    周四
+                </p>
+
+
+                <p class="op_weather4_twoicon_date_day">12月21日</p>
+
+                <div class="op_weather4_twoicon_icon"
+                     style="background:url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/1.png);*background:none;*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/aladdin/img/new_weath/icon/1.png,sizingMethod='scale')"></div>
+
+
+                <p class="op_weather4_twoicon_temp">-7 ~ 6℃</p>
+                <p class="op_weather4_twoicon_weath" title="晴">
+
+                    晴
+
+                </p>
+                <p class="op_weather4_twoicon_wind">西南风微风</p>
+
+
+            </a>
+
+
+            <div bg-name="evening" class="op_weather4_twoicon_bg"
+                 style="background-image: -webkit-linear-gradient(top, rgb(57, 73, 132), rgb(204, 102, 110) 60%, rgb(238, 182, 109)); height: 404px; z-index: 1; opacity: 1; display: block;">
+                <div style="position:absolute;width:100%;height:150px;filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=#394984,EndColorStr=#CC666E)"></div>
+                <div style="position:absolute;width:100%;height:80px;top:150px;filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=#CC666E,EndColorStr=#EEB66D)"
+                     class="op_weather4_twoicon_bgie"></div>
+            </div>
+
+
+            <div bg-name="daytime" class="op_weather4_twoicon_bg"
+                 style="display: none; background-image: -webkit-linear-gradient(top, rgb(13, 104, 188), rgb(114, 173, 224)); height: 404px; z-index: 2; opacity: 2.498e-16;">
+            </div>
+            <div class="sjs" id="sjs0"
+                 style="overflow: hidden; position: relative; width: 538px; height: 250px; z-index: 10;">
+                <div id="sjs0-default"
+                     style="z-index: 2; height: 250px; width: 538px; position: absolute; top: 0px; left: 0px;"></div>
+                <canvas id="sjs0-eff-halo" height="250" width="538"
+                        style="z-index: 1; position: absolute; top: 0px; left: 0px; display: none; opacity: 0.01;"></canvas>
+                <div id="sjs0-light"
+                     style="z-index: 4; height: 250px; width: 538px; position: absolute; top: 0px; left: 0px; opacity: 0; background-color: rgb(255, 255, 255);"></div>
+            </div>
+        </div>
+
+
+        <style type="text/css">
+            .op_weather4_twoicon {
+                height: 282px;
+            }
+
+            .op_weather4_twoicon_bg {
+                height: 404px;
+            }
+
+            .op_weather4_xiala {
+                width: 100%;
+                position: absolute;
+                z-index: 5;
+                top: 251px;
+                font-family: '微软雅黑', '黑体', Arial;
+            }
+
+            .op_weather4_xltab ul li {
+                width: 78px;
+                list-style: none;
+                float: left;
+                background: rgba(255, 255, 255, 0.2);
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr='#20ffffff', endColorstr='#20ffffff');
+                text-align: center;
+                line-height: 26px;
+                margin-right: 1px;
+                font-size: 12px;
+                cursor: pointer;
+                display: block;
+            }
+
+            .op_weather4_xltab ul li.op_weather4_xlactive {
+                height: 27px;
+                background: rgba(255, 255, 255, 0.1);
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#10ffffff, endColorstr=#10ffffff);
+            }
+
+            .op_weather4_xlcon {
+                background: rgba(255, 255, 255, 0.1);
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#10ffffff, endColorstr=#10ffffff);
+                height: 114px;
+            }
+
+            .op_weather4_xlleft {
+                float: left;
+                height: 86px;
+                width: 35px;
+                font-size: 10px;
+                color: #fff;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                -webkit-transform: scale(0.8);
+                -moz-transform: scale(0.8);
+                -o-transform: scale(0.8);
+            }
+
+            .op_weather4_xlleft ul li {
+                padding-top: 4px;
+                padding-top: 2px \9;
+                list-style: none;
+                text-align: right;
+            }
+
+            .op_weather4_xltimeul {
+                clear: both;
+                font-size: 12px;
+                padding-left: 42px;
+                padding-top: 2px \9;
+            }
+
+            .op_weather4_xltimeul ul {
+                width: 520px;
+            }
+
+            .op_weather4_xltimeul ul li {
+                float: left;
+                list-style: none;
+                width: 56px;
+                text-align: left;
+                color: #fff;
+            }
+
+            .op_weather4_xltimeul-s ul li {
+                float: left;
+                list-style: none;
+                width: 56px;
+                text-align: left;
+                color: #fff;
+            }
+
+            .op_weather4_xltimeul-s ul {
+                width: 520px;
+            }
+
+            .op_weather4_yuandian {
+                background: url('//www.baidu.com/aladdin/img/new_weath/ico.png') no-repeat;
+            }
+
+            .op_weather4_xllefts {
+                font-size: 10px;
+                -webkit-transform: scale(0.8);
+                -moz-transform: scale(0.8);
+                -o-transform: scale(0.8);
+                position: absolute;
+                top: -14px;;
+                left: -11px;
+                color: #fff;
+                width: 40px;
+                text-align: center;
+            }
+
+            .op_weather4_xlqyyc {
+                float: left;
+                width: 40px;
+                height: 106px;
+                position: absolute;
+                top: 0;
+                cursor: pointer;
+                z-index: 9;
+            }
+
+            .op_weather4_xltip {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10;
+                font-size: 12px;
+            }
+
+            .op_weather4_xlico {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                border-color: transparent transparent white transparent;
+                border-style: solid;
+                border-width: 0 5px 5px 5px;
+                width: 0;
+                height: 0;
+                top: 1px;
+                z-index: 2;
+            }
+
+            .op_weather4_xlcont {
+                background: #fff;
+                margin-top: 5px;
+                color: #555;
+                padding: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .op_weather4_jsl {
+                width: 20px;
+                height: 114px;
+                float: left;
+            }
+
+            .op_weather4_jsm {
+                width: 498px;
+                height: 84px;
+                float: left;
+                margin-top: 15px;
+                font-size: 12px;
+            }
+
+            .op_weather4_jsm ul li {
+                width: 55px;
+                float: left;
+                background: url('//www.baidu.com/aladdin/img/new_weath/icobg.png') no-repeat right 0;
+            }
+
+            .op_weather4_jsm span {
+                display: block;
+                text-align: center;
+            }
+
+            .op_weather4_jsr {
+                width: 20px;
+                height: 114px;
+                float: left;
+            }
+
+            .op_weather4_jsm ul li .op_weather4_jsico {
+                height: 24px;
+                padding: 13px 0 13px 18px;
+            }
+
+            .op_weather4_jsiconborw0, .op_weather4_jsiconborw1, .op_weather4_jsiconborw2, .op_weather4_jsiconborw3, .op_weather4_jsiconborw4, .op_weather4_jsiconborw5, .op_weather4_jsiconborw6, .op_weather4_jsiconborw7, .op_weather4_jsiconborw8, .op_weather4_jsiconborw9, .op_weather4_jsiconborw10 {
+                width: 18px;
+                height: 23px;
+                background: url('//www.baidu.com/aladdin/img/new_weath/icowater.png') no-repeat;
+            }
+
+            .op_weather4_jsiconborw0 {
+                background-position: 0 0px;
+            }
+
+            .op_weather4_jsiconborw1 {
+                background-position: 0 -33px;
+            }
+
+            .op_weather4_jsiconborw2 {
+                background-position: 0 -66px;
+            }
+
+            .op_weather4_jsiconborw3 {
+                background-position: 0 -99px;
+            }
+
+            .op_weather4_jsiconborw4 {
+                background-position: 0 -132px;
+            }
+
+            .op_weather4_jsiconborw5 {
+                background-position: 0 -165px;
+            }
+
+            .op_weather4_jsiconborw6 {
+                background-position: 0 -198px;
+            }
+
+            .op_weather4_jsiconborw7 {
+                background-position: 0 -231px;
+            }
+
+            .op_weather4_jsiconborw8 {
+                background-position: 0 -264px;
+            }
+
+            .op_weather4_jsiconborw9 {
+                background-position: 0 -297px;
+            }
+
+            .op_weather4_jsiconborw10 {
+                background-position: 0 -330px;
+            }
+
+            .op_weather4_xlzs {
+                width: 240px;
+                float: left;
+                margin-left: 17px;
+                border-bottom: 1px solid #ddd;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                line-height: 32px;
+                height: 32px;
+                cursor: pointer;
+            }
+
+            .op_weather4_xlzstit {
+                font-size: 16px;
+            }
+
+            .op_weather4_xlzstitdes {
+                font-size: 12px;
+            }
+
+            .op_weather4_xlbornone {
+                border-bottom: 0;
+            }
+
+            .op_weather4_xltop {
+                padding-top: 8px;
+                clear: both;
+            }
+
+            .op_weather4_xltiptitle {
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 24px;
+            }
+
+            .op_weather4_xltipcontent {
+                line-height: 20px;
+            }
+
+            .op_weather4_xlopen {
+                width: 100%;
+                height: 29px;
+                background: rgba(0, 0, 0, 0.1);
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#10000000, endColorstr=#10000000);
+                cursor: pointer;
+                text-align: center;
+                z-index: 6;
+                padding-top: 3px;
+            }
+
+            .op_weather4_tipbtn {
+                display: inline-block;
+                padding: 2px 0;
+                cursor: pointer;
+            }
+
+            .op_weather4_tipbtn span {
+                display: inline-block;
+            }
+
+            .op_weather4_icobottom {
+                background: url('//www.baidu.com/aladdin/img/new_weath/ico.png') 0 -188px no-repeat;
+                width: 27px;
+                height: 11px;
+                display: inline-block;
+            }
+
+            .op_weather4_xlclose {
+                height: 32px;
+                cursor: pointer;
+                text-align: center;
+                z-index: 6;
+            }
+
+            .op_weather4_xlclose .op_weather4_icobottom {
+                background: url('//www.baidu.com/aladdin/img/new_weath/ico.png') 0 -212px no-repeat;
+            }
+
+            .op_weather4_xlCanvascon1, .op_weather4_xlCanvascon2 {
+                position: relative;
+                margin-left: 36px;
+            }
+
+            .op_weather4_jslNovalue {
+                background: none;
+                padding-top: 4px;
+            }
+
+            .op_weather4_xltab ul .op_weather4_temperature {
+                width: 106px;
+            }
+        </style>
+
+
+        <div class="op_weather4_xiala">
+            <div class="op_weather4_xltabcontent" style="display: block;">
+                <a href="http://www.baidu.com/link?url=e6XDRnvvIR8AZ4gdDeGFjfHTM-oAIFO_0DNPjcJLgyz8J7iowhEU87Dx6JcTKx1IfSleJXIeHgxiCg-DrhocbaOE1WBjTUIqHVcfaTQEhBu"
+                   target="_blank" style="color:#ffffff; text-decoration: none;">
+                    <div class="op_weather4_xlcon" style="display: block;">
+                        <div class="c-row">
+                            <div class="op_weather4_xlleft">
+                                <ul class="op_weather4_xlleftfswd">
+                                    <li>10</li>
+                                    <li>5</li>
+                                    <li>0</li>
+                                    <li>-5</li>
+                                    <li>-10</li>
+                                </ul>
+                            </div>
+                            <div style="float:left;">
+                                <div class="op_weather4_xlCanvascon1">
+                                    <canvas class="op_weather4_xlCanvas1" width="480" height="86"></canvas>
+                                    <div class="op_weather4_xlqyyc" style="left: 0px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 35.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 24px;">2°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 56px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 42.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 31px;">0°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 112px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 42.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 31px;">0°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 168px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 52.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 41px;">-3°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 224px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 56.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 45px;">-4°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 280px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 56.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 45px;">-4°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 336px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 28.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 17px;">4°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 392px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 24.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 13px;">5°C
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 448px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 14px; top: 31.5px; background-position: 0px 3px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; left: 0px; top: 20px;">3°C
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op_weather4_xltimeul op_weather4_xltimeul-s">
+                            <ul>
+                                <li class="op_weather4_xltimeulscal">现在</li>
+                                <li class="op_weather4_xltimeulscal">20点</li>
+                                <li class="op_weather4_xltimeulscal">23点</li>
+                                <li class="op_weather4_xltimeulscal">02点</li>
+                                <li class="op_weather4_xltimeulscal">05点</li>
+                                <li class="op_weather4_xltimeulscal">08点</li>
+                                <li class="op_weather4_xltimeulscal">11点</li>
+                                <li class="op_weather4_xltimeulscal">14点</li>
+                                <li class="op_weather4_xltimeulscal">17点</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="op_weather4_xlcon" style="display: none;">
+                        <div class="c-row">
+                            <div class="op_weather4_xlleft">
+                                <ul class="op_weather4_xlleftflfx">
+                                    <li>8</li>
+                                    <li>6</li>
+                                    <li>4</li>
+                                    <li>2</li>
+                                    <li>0</li>
+                                </ul>
+                            </div>
+                            <div style="float:left;">
+                                <div class="op_weather4_xlCanvascon2">
+                                    <canvas class="op_weather4_xlCanvas2" width="480" height="86"></canvas>
+                                    <div class="op_weather4_xlqyyc" style="left: 0px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 70px; background-position: 0px -147px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 57px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西风</p>
+                                                <p>风力：1级</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 56px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 79px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 66px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：微风</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 112px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 79px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 66px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：微风</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 168px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 79px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 66px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：微风</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 224px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 79px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 66px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：微风</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 280px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 79px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 66px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：微风</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 336px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 53px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 40px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：3-4级</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 392px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 53px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 40px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：3-4级</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="op_weather4_xlqyyc" style="left: 448px; width: 56px;">
+                                        <div class="op_weather4_yuandian"
+                                             style="position: absolute; width: 14px; height: 14px; left: 13px; top: 79px; background-position: 0px -167px;"></div>
+                                        <div class="op_weather4_xllefts"
+                                             style="position: absolute; width: 42px; left: 0px; top: 66px;"></div>
+                                        <div class="op_weather4_xltip"
+                                             style="width: 100px; top: 108px; left: -30px; z-index: 1000; display: none;">
+                                            <span class="op_weather4_xlico" style="left: 45px;"></span>
+                                            <div class="op_weather4_xlcont"><p>风向：西北风</p>
+                                                <p>风力：微风</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op_weather4_xltimeul">
+                            <ul>
+                                <li>现在</li>
+                                <li>20点</li>
+                                <li>23点</li>
+                                <li>02点</li>
+                                <li>05点</li>
+                                <li>08点</li>
+                                <li>11点</li>
+                                <li>14点</li>
+                                <li>17点</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="op_weather4_xlcon" style="display: none;">
+                        <div class="op_weather4_jsl"></div>
+                        <div class="op_weather4_jsm">
+                            <ul class="op_weather4_jslul">
+                                <li><span>现在</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>20点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>23点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>02点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>05点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>08点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>11点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>14点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                                <li><span>17点</span>
+                                    <div class="op_weather4_jsico"><span class="op_weather4_jsiconborw0"></span></div>
+                                    <span class="op_weather4_jsml">0mm</span></li>
+                            </ul>
+                        </div>
+                        <div class="op_weather4_jsr"></div>
+                    </div>
+                    <div class="op_weather4_xlcon" style="display: none;">
+                        <ul class="op_weather4_xltop c-clearfix">
+                            <li class="op_weather4_xlzs" style="position: relative; z-index: 6;">
+                                <div class="op_weather4_xlzstit">穿衣：冷</div>
+                                <div class="op_weather4_xltip"
+                                     style="width: 335px; top: 27px; left: 0px; z-index: 1000; display: none;"><span
+                                        class="op_weather4_xlico" style="left: 35px;"></span>
+                                    <div class="op_weather4_xlcont">
+                                        <div class="op_weather4_xltiptitle">穿衣指数：冷</div>
+                                        <div class="op_weather4_xltipcontent">
+                                            天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="op_weather4_xlzs" style="position: relative; z-index: 5;">
+                                <div class="op_weather4_xlzstit">洗车：较适宜</div>
+                                <div class="op_weather4_xltip"
+                                     style="width: 335px; top: 27px; left: 0px; z-index: 1000; display: none;"><span
+                                        class="op_weather4_xlico" style="left: 35px;"></span>
+                                    <div class="op_weather4_xlcont">
+                                        <div class="op_weather4_xltiptitle">洗车指数：较适宜</div>
+                                        <div class="op_weather4_xltipcontent">较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="op_weather4_xlzs" style="position: relative; z-index: 4;">
+                                <div class="op_weather4_xlzstit">感冒：少发</div>
+                                <div class="op_weather4_xltip"
+                                     style="width: 335px; top: 27px; left: 0px; z-index: 1000; display: none;"><span
+                                        class="op_weather4_xlico" style="left: 35px;"></span>
+                                    <div class="op_weather4_xlcont">
+                                        <div class="op_weather4_xltiptitle">感冒指数：少发</div>
+                                        <div class="op_weather4_xltipcontent">各项气象条件适宜，无明显降温过程，发生感冒机率较低。</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="op_weather4_xlzs" style="position: relative; z-index: 3;">
+                                <div class="op_weather4_xlzstit">运动：较适宜</div>
+                                <div class="op_weather4_xltip"
+                                     style="width: 335px; top: 27px; left: 0px; z-index: 1000; display: none;"><span
+                                        class="op_weather4_xlico" style="left: 35px;"></span>
+                                    <div class="op_weather4_xlcont">
+                                        <div class="op_weather4_xltiptitle">运动指数：较适宜</div>
+                                        <div class="op_weather4_xltipcontent">
+                                            天气较好，无雨水困扰，较适宜进行各种运动，但因气温较低，在户外运动请注意增减衣物。
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="op_weather4_xlzs op_weather4_xlbornone" style="position: relative; z-index: 2;">
+                                <div class="op_weather4_xlzstit">紫外线强度：中等</div>
+                                <div class="op_weather4_xltip"
+                                     style="width: 335px; top: 27px; left: 0px; z-index: 1000; display: none;"><span
+                                        class="op_weather4_xlico" style="left: 35px;"></span>
+                                    <div class="op_weather4_xlcont">
+                                        <div class="op_weather4_xltiptitle">紫外线强度指数：中等</div>
+                                        <div class="op_weather4_xltipcontent">
+                                            属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+                <div class="op_weather4_xltab c-clearfix">
+                    <ul>
+                        <li class="OP_LOG_BTN op_weather4_temperature op_weather4_xlactive" data-click="{fm:'beha'}">
+                            <span class="op_weather4_xlfilter">24小时温度</span></li>
+                        <li class="OP_LOG_BTN" data-click="{fm:'beha'}"><span class="op_weather4_xlfilter">风力风向</span>
+                        </li>
+                        <li class="OP_LOG_BTN" data-click="{fm:'beha'}"><span class="op_weather4_xlfilter">降水量</span>
+                        </li>
+                        <li class="OP_LOG_BTN" data-click="{fm:'beha'}"><span class="op_weather4_xlfilter">相关指数</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="op_weather4_xlopen OP_LOG_BTN" data-click="{fm:'beha'}" style="display:none;">
+                <div class="op_weather4_xlfilter">
+                <span class="op_weather4_tipbtn"><span>查看今天详细数据</span>
+                    <i class="op_weather4_icobottom"></i>
+                </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="op_weather4_twoicon_wlink" style="margin-top: 0px;">中国气象局2017年12月17日18时发布
+        <a target="_blank" class="op_weather4_twoicon_alink"
+           href="http://www.baidu.com/link?url=tUNcpWpyQBlt65-c0QK5rYrubREaJN5BzDrhG4YxUuXAaV8tBq3eFoaD9qnbXzgcH93aW7gCc0LrEzmL8qTH4_"><span
+                class="op_weather4_twoicon_aa">7天预报</span></a>
+        <a target="_blank" class="op_weather4_twoicon_alink"
+           href="http://www.baidu.com/link?url=tUNcpWpyQBlt65-c0QK5rYrubREaJN5BzDrhG4YxUuW7g1oLMnu1R_IjJxnJM6Vnlxypvz8cq3jO_LscrCM2t_"><span
+                class="op_weather4_twoicon_aa">8-15天预报</span></a>
+        <a target="_blank" class="op_weather4_twoicon_alink"
+           href="http://www.baidu.com/link?url=e6XDRnvvIR8AZ4gdDeGFjdNUCxAxkAKB6hY5EnARh3gNH85nlVST4MyUCy9Z-AmcyScjOPvV9rqUUoEhUK9KaxVcShpDfipV4T993ZiOi1a"><span
+                class="op_weather4_twoicon_aa">周边景点天气</span></a>
+
+        <div class="op_weather4_twoicon_search"><strong>其他用户还搜索了：</strong></div>
+        <div style="font-size:13px;">
+            <span class="c-showurl">www.weather.com.cn/ </span><span class="c-tools" id="tools_12178790953536566878_1"
+                                                                     data-tools="{title:'北京天气预报_一周天气预报_中国天气网',url:'http://www.weather.com.cn/weather/101010100.shtml'}"><a
+                class="c-tip-icon"><i class="c-icon c-icon-triangle-down-g"></i></a></span> - <a target="_blank"
+                                                                                                 href="http://open.baidu.com/"
+                                                                                                 class="op_LAMP"></a>&nbsp;-&nbsp;<a
+                href="javascript:;" onclick="return false;" class="c-gray c-feedback"
+                data-click="{'fm':'beha'}">给百度提建议</a>
+        </div>
+    </div>
+    <script data-compress="off">
+        A.setup('weather4_twoicondata', {
+            'url': "http%3A%2F%2Fwww.weather.com.cn%2Fweather%2F101010100.shtml",
+            'oq': "中国天气网",
+            'fetchkey': "13031_北京天气",
+            'resourceid': "13031",
+            'swfurl': "http://www.baidu.com/aladdin/flash/weather/index.swf?from=baidu",
+            'swfon': "显示北京地区天气预报",
+            'swfoff': "关闭",
+            'swfcondition': "beijing",
+            'snowlevel': "",
+            'warn': "",
+            'folder': "1",
+            'originQuery': "北京天气",
+            'srcid': "13031",
+            'fswdaxes': "",
+            'fswdi': '[{"id":"1","y":"42","yw":"2","t":"2017-12-17 18:21:30","wt":"2","wn":"\u6674"},{"id":"2","y":"35","yw":"0","t":"2017-12-17 20:00:00","wt":"2","wn":"\u6674"},{"id":"3","y":"35","yw":"0","t":"2017-12-17 23:00:00","wt":"2","wn":"\u6674"},{"id":"4","y":"25","yw":"-3","t":"2017-12-18 02:00:00","wt":"2","wn":"\u6674"},{"id":"5","y":"21","yw":"-4","t":"2017-12-18 05:00:00","wt":"1","wn":"\u6674"},{"id":"6","y":"21","yw":"-4","t":"2017-12-18 08:00:00","wt":"1","wn":"\u6674"},{"id":"7","y":"49","yw":"4","t":"2017-12-18 11:00:00","wt":"1","wn":"\u6674"},{"id":"8","y":"53","yw":"5","t":"2017-12-18 14:00:00","wt":"1","wn":"\u6674"},{"id":"9","y":"46","yw":"3","t":"2017-12-18 17:00:00","wt":"1","wn":"\u6674"},{"id":"10","y":"35","yw":"0","t":"2017-12-18 20:00:00","wt":"2","wn":"\u6674"},{"id":"11","y":"32","yw":"-1","t":"2017-12-18 23:00:00","wt":"2","wn":"\u6674"},{"id":"12","y":"21","yw":"-4","t":"2017-12-19 02:00:00","wt":"2","wn":"\u6674"},{"id":"13","y":"18","yw":"-5","t":"2017-12-19 05:00:00","wt":"1","wn":"\u6674"},{"id":"14","y":"18","yw":"-5","t":"2017-12-19 08:00:00","wt":"1","wn":"\u6674"}]',
+            'syncFswdaxes': 'null',
+            'syncFlfxaxes': 'null',
+            'flfx': 'null',
+            'flfxi': '[{"id":"1","y":"9","f":"\u897f\u98ce","fn":"6","fl":"1\u7ea7","t":"2017-12-17 18:21:30"},{"id":"2","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-17 20:00:00"},{"id":"3","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-17 23:00:00"},{"id":"4","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-18 02:00:00"},{"id":"5","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-18 05:00:00"},{"id":"6","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-18 08:00:00"},{"id":"7","y":"26","f":"\u897f\u5317\u98ce","fn":"7","fl":"3-4\u7ea7","t":"2017-12-18 11:00:00"},{"id":"8","y":"26","f":"\u897f\u5317\u98ce","fn":"7","fl":"3-4\u7ea7","t":"2017-12-18 14:00:00"},{"id":"9","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-18 17:00:00"},{"id":"10","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-18 20:00:00"},{"id":"11","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-18 23:00:00"},{"id":"12","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-19 02:00:00"},{"id":"13","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-19 05:00:00"},{"id":"14","y":"0","f":"\u897f\u5317\u98ce","fn":"7","fl":"\u5fae\u98ce","t":"2017-12-19 08:00:00"}]',
+            'jsl': 'null',
+            'jsli': '[{"id":"1","t":"2017-12-17 18:21:30","p":"0"},{"id":"2","t":"2017-12-17 20:00:00","p":"0"},{"id":"3","t":"2017-12-17 23:00:00","p":"0"},{"id":"4","t":"2017-12-18 02:00:00","p":"0"},{"id":"5","t":"2017-12-18 05:00:00","p":"0"},{"id":"6","t":"2017-12-18 08:00:00","p":"0"},{"id":"7","t":"2017-12-18 11:00:00","p":"0"},{"id":"8","t":"2017-12-18 14:00:00","p":"0"},{"id":"9","t":"2017-12-18 17:00:00","p":"0"},{"id":"10","t":"2017-12-18 20:00:00","p":"0"},{"id":"11","t":"2017-12-18 23:00:00","p":"0"},{"id":"12","t":"2017-12-19 02:00:00","p":"0"},{"id":"13","t":"2017-12-19 05:00:00","p":"0"},{"id":"14","t":"2017-12-19 08:00:00","p":"0"}]',
+            'xgzs': '[{"title":"\u7a7f\u8863","zs":"\u51b7","tipt":"\u7a7f\u8863\u6307\u6570","des":"\u5929\u6c14\u51b7\uff0c\u5efa\u8bae\u7740\u68c9\u670d\u3001\u7fbd\u7ed2\u670d\u3001\u76ae\u5939\u514b\u52a0\u7f8a\u6bdb\u886b\u7b49\u51ac\u5b63\u670d\u88c5\u3002\u5e74\u8001\u4f53\u5f31\u8005\u5b9c\u7740\u539a\u68c9\u8863\u3001\u51ac\u5927\u8863\u6216\u539a\u7fbd\u7ed2\u670d\u3002"},{"title":"\u6d17\u8f66","zs":"\u8f83\u9002\u5b9c","tipt":"\u6d17\u8f66\u6307\u6570","des":"\u8f83\u9002\u5b9c\u6d17\u8f66\uff0c\u672a\u6765\u4e00\u5929\u65e0\u96e8\uff0c\u98ce\u529b\u8f83\u5c0f\uff0c\u64e6\u6d17\u4e00\u65b0\u7684\u6c7d\u8f66\u81f3\u5c11\u80fd\u4fdd\u6301\u4e00\u5929\u3002"},{"title":"\u611f\u5192","zs":"\u5c11\u53d1","tipt":"\u611f\u5192\u6307\u6570","des":"\u5404\u9879\u6c14\u8c61\u6761\u4ef6\u9002\u5b9c\uff0c\u65e0\u660e\u663e\u964d\u6e29\u8fc7\u7a0b\uff0c\u53d1\u751f\u611f\u5192\u673a\u7387\u8f83\u4f4e\u3002"},{"title":"\u8fd0\u52a8","zs":"\u8f83\u9002\u5b9c","tipt":"\u8fd0\u52a8\u6307\u6570","des":"\u5929\u6c14\u8f83\u597d\uff0c\u65e0\u96e8\u6c34\u56f0\u6270\uff0c\u8f83\u9002\u5b9c\u8fdb\u884c\u5404\u79cd\u8fd0\u52a8\uff0c\u4f46\u56e0\u6c14\u6e29\u8f83\u4f4e\uff0c\u5728\u6237\u5916\u8fd0\u52a8\u8bf7\u6ce8\u610f\u589e\u51cf\u8863\u7269\u3002"},{"title":"\u7d2b\u5916\u7ebf\u5f3a\u5ea6","zs":"\u4e2d\u7b49","tipt":"\u7d2b\u5916\u7ebf\u5f3a\u5ea6\u6307\u6570","des":"\u5c5e\u4e2d\u7b49\u5f3a\u5ea6\u7d2b\u5916\u7ebf\u8f90\u5c04\u5929\u6c14\uff0c\u5916\u51fa\u65f6\u5efa\u8bae\u6d82\u64e6SPF\u9ad8\u4e8e15\u3001PA+\u7684\u9632\u6652\u62a4\u80a4\u54c1\uff0c\u6234\u5e3d\u5b50\u3001\u592a\u9633\u955c\u3002"}]',
+            'fswdiaxes': '[{"ymin":"-10","ymax":"10"}]',
+            'flfxiaxes': '[{"ymin":"0","ymax":"8"}]'
+        });
+    </script>
+
+    <script data-compress="off">
+        A.init(function () {
+            var _this = this,
+                wtimer,
+                snowInterval,               //产生雪花interval
+                snowStopHover = false,      //雪花特效时取消hover切换效果
+                moveInterval = null,                            //雪花移动interval
+                hideInterval = null;                            //雪花渐隐消失interval
+            var weather4_twoicondata = _this.data.weather4_twoicondata;
+            var tid = -1;
+            var scene;
+
+            // ==========================================================================================
+            // 新版天气脚本 by zhangjiachen
+            // ==========================================================================================
+            var $UA = navigator.userAgent;
+            var $IE = $UA.match(/MSIE (\d+)/);
+            $IE = $IE && +$IE[1];
+            if ($IE) {
+                var dummy = document.createElement('iframe');
+                document.body.appendChild(dummy);
+                $UA = dummy.contentWindow.navigator.userAgent;
+                $IE = +$UA.match(/MSIE (\d+)/)[1];
+                document.body.removeChild(dummy);
+                dummy = null;
+
+                var $IE6 = ($IE == 6);
+                var $IE78 = ($IE == 7 || $IE == 8);
+            }
+
+
+            function URL(path) {
+                return '//www.baidu.com/aladdin/img/new_weath/' + path;
+            }
+
+            function getProtocalUrl(url) {
+                var reg = /^http:\/\/www.baidu.com/;
+                if (reg.test(url)) {
+                    url = url.replace("http:", "");
+                }
+                return url;
+            }
+
+            var efUsed = {},
+                efFact = {};
+
+            var layerLight;
+
+
+            // ==================================================
+            // 光晕特效
+            // ==================================================
+            efFact.halo = function (exports) {
+                var SUN_X = 320;
+
+                var LIGHT_DEF = 1;
+                var LIGHT_MAX = 1;
+                var LIGHT_MIN = 0.85;
+
+                var RING_NUM = 7;
+                var RING_D = 216;
+                var MARGIN_TOP = 100;
+
+                var rings = [];
+                var light;
+                var inited;
+
+                var op = LIGHT_DEF;
+                var A = 0.0005;
+
+
+                function init() {
+                    light = scene.Sprite(URL('halo/light.png'), exports.layer);
+                    light.position(SUN_X - light.w / 2, 0);
+
+                    for (var i = 0; i < RING_NUM; i++) {
+                        var spt = scene.Sprite(URL('halo/ring.png'), exports.layer);
+                        var y = Math.random() * 250;
+                        var x = SUN_X - 150 - y * 0.3;
+
+                        spt.position(x, y);
+                        spt.size(RING_D, RING_D);
+                        spt.setXOffset(RING_D * i);
+
+                        rings[i] = spt;
+                    }
+                }
+
+                exports.render = function () {
+                    if (!inited) {
+                        init();
+                        inited = true;
+                    }
+
+                    //
+                    // 更新光线亮度
+                    //
+                    op += A;
+                    if (op >= LIGHT_MAX || op <= LIGHT_MIN) {
+
+                        A = -A;
+                    }
+
+                    if (!$IE78) {
+                        light.setOpacity(op);
+                    }
+                    light.update();
+
+                    //
+                    // 更新光晕
+                    //
+                    for (var i = 0; i < RING_NUM; i++) {
+                        rings[i].update();
+                    }
+                };
+
+                exports.RES = ['halo/light.png', 'halo/ring.png'];
+            };
+
+
+            var defEff, curEff;
+
+
+            function checkCanvas() {
+                return 'getContext' in document.createElement('canvas');
+            }
+
+            function loadEff(e) {
+                var res = e.RES;
+                for (var i = res.length - 1; i >= 0; i--) {
+                    res[i] = URL(res[i]);
+                }
+
+                scene.loadImages(res, function () {
+                    e.loaded = true;
+                });
+            }
+
+            function renderEff() {
+                if ($IE6) return;
+
+                for (var k in efUsed) {
+                    if (efUsed.hasOwnProperty(k)) {
+                        var e = efUsed[k];
+                        if (!e.loaded) continue;
+
+                        var last = e.alpha;
+                        e.alpha += ALPHA_DELTA;
+
+                        if (e.alpha > 0) {
+                            e.render();
+                            if (!$IE78) {
+                                // 淡出中，此过程图层内容仍保持更新
+                                if (e.alpha < 1.0) {
+                                    e.layer.setOpacity(e.alpha);
+                                }
+                            }
+                        }
+                        else {
+                            // 已消失，隐藏图层
+                            if (last > 0) {
+                                e.layer.setVisible(false);
+                            }
+                        }
+                    }
+                }
+            }
+
+            function setEff(effArgs) {
+                if ($IE6) return;
+
+                for (var k in curEff) {
+                    if (curEff.hasOwnProperty(k)) {
+                        if ($IE78) efUsed[k].layer.setVisible(false);
+
+                        efUsed[k].alpha = 1.0;
+                    }
+                }
+
+                // 显示的特效层
+                for (var k in effArgs) {
+                    if (effArgs.hasOwnProperty(k)) {
+                        var e = efUsed[k];
+                        if (!e.loaded && !e.loading) {
+                            e.loading = true;
+                            loadEff(e);
+                        }
+
+                        e.arg = effArgs[k];
+                        e.alpha = 9e9;
+                        e.layer.setVisible(true);
+
+                        if (!$IE78) e.layer.setOpacity(1.0);
+                    }
+                }
+
+                curEff = effArgs;
+            }
+
+            function initEff() {
+                if ($IE6) return;
+
+                var opt;
+                if (checkCanvas()) {
+                    opt = {useCanvas: true, autoClear: true};
+                }
+
+                for (var k in efFact) {
+                    if (efFact.hasOwnProperty(k)) {
+                        // 初始化特效
+                        var exports = {};
+                        efFact[k](exports);
+                        exports.layer = scene.Layer('eff-' + k, opt);
+                        exports.layer.setZIndex(1.0);
+                        exports.layer.setVisible(false);
+
+                        efUsed[k] = exports;
+                    }
+                }
+
+                layerLight = scene.Layer('light');
+                layerLight.setOpacity(0);
+                layerLight.setColor('#fff');
+            }
+
+
+            //
+            // 背景渐变
+            //
+            var CANVAS_W = 538,
+                CANVAS_H = 250,
+                ALPHA_DELTA = -0.03;
+
+
+            var layers_bg = {};
+
+            var fading;
+            var opacity;
+            var defBg, curBg;
+            var divOldBg;
+
+
+            // IE下使用滤镜半透明
+            var setAlpha = 'opacity' in document.body.style ?
+                function (el, v) {
+                    el.style.opacity = v
+                } :
+                function (el, v) {
+                    var flt = el._flt;
+                    if (!flt) {
+                        el.style.filter += ' alpha';
+                        flt = el._flt = el.filters.alpha;
+                    }
+                    flt.opacity = v * 100;
+                };
+
+
+            function setBg(bg) {
+                if (bg == curBg) {
+                    return;
+                }
+
+                var divBg = layers_bg[bg];
+
+                // 首次背景
+                if (opacity > 0) {
+                    setAlpha(divOldBg, 0);
+                    divOldBg.style.display = 'none';
+                    opacity = 1 - opacity;
+                }
+                else {
+                    opacity = 1;
+                }
+
+                divOldBg = layers_bg[curBg];
+
+                // 旧背景放前面，逐渐淡出
+                divOldBg.style.zIndex = 2;
+                setAlpha(divOldBg, 1.0);
+
+                // 新背景放后面，逐渐深入
+                divBg.style.zIndex = 1;
+                divBg.style.display = 'block';
+                setAlpha(divBg, 1.0);
+
+                curBg = bg;
+                fading = true;
+            }
+
+            function renderBg() {
+                opacity += ALPHA_DELTA;
+
+                if (opacity < 0) {
+                    divOldBg.style.display = 'none';
+                    fading = false;
+                }
+                else {
+                    setAlpha(divOldBg, opacity);
+                }
+            }
+
+            //
+            // hover高亮
+            //
+
+            function handleOver() {
+                if (snowStopHover) {
+                    return;
+                }
+                if (tid != -1) {
+                    clearTimeout(tid);
+                    tid = -1;
+                }
+
+                var bg = this.getAttribute('weath-bg');
+                setBg(bg);
+                setEff(this.eff);
+            }
+
+            function handleOut() {
+                if (snowStopHover) {
+                    return;
+                }
+                tid = setTimeout(function () {
+                    setBg(defBg);
+                    setEff(defEff);
+                }, 20);
+            }
+
+
+            function render() {
+                if (fading) {
+                    renderBg();
+                }
+
+                renderEff();
+            }
+
+            function initAni() {
+                scene = A.ui.sjs.Scene({w: CANVAS_W, h: CANVAS_H, parent: _this.qq('op_weather4_twoicon')});
+                scene.dom.style.zIndex = 10;
+
+                initEff();
+                setEff(defEff);
+
+                var ticker = scene.Ticker(1000 / 60, render);
+                ticker.run();
+            }
+
+
+            function init() {
+                // hover
+                var arr = _this.q('op_weather4_twoicon_today').concat(_this.q('op_weather4_twoicon_day'));
+                for (var i = arr.length - 1; i >= 0; i--) {
+                    var column = arr[i];
+
+                    // 获取特效属性
+                    var eff = column.getAttribute('weath-eff');
+                    if (eff) {
+                        eff = new Function('return ' + eff)();
+                        column.eff = eff;
+
+                        // 默认的动画（当天）
+                        if (i == 0) {
+                            defEff = eff;
+                        }
+                    }
+
+                    // 获取背景属性
+                    if (i == 0) {
+                        curBg = defBg = column.getAttribute('weath-bg');
+                    }
+
+                    if ($IE) {
+                        column.onmouseenter = handleOver;
+                        column.onmouseleave = handleOut;
+                    }
+                    else {
+                        column.onmouseover = handleOver;
+                        column.onmouseout = handleOut;
+                    }
+                }
+
+                //
+                // 获取背景层元素
+                //
+                arr = _this.q('op_weather4_twoicon_bg');
+                for (i = arr.length - 1; i >= 0; i--) {
+                    var name = arr[i].getAttribute('bg-name');
+                    layers_bg[name] = arr[i];
+                }
+
+                A.use('sjs', initAni);
+            }
+
+
+            wtimer = setTimeout(init, 1);
+            // ====================================================================================================
+
+            //flash.js start
+            var CF = new (function () {
+                var fdf = false;
+                var checkflash;
+                var hide;
+                var hidebr;
+                var creatFlash;
+                var check;
+                var firstbr = true;
+                var clickURL = "//www.baidu.com/aladdin/flash/weather/index.swf";
+                //给flash加上时间参数
+                function addTimeStamp(url, param) {
+                    if (!url) return false;
+                    var regexp = new RegExp('(\\?|&)(' + param + '=[^&$]*)');
+                    if (regexp.test(url)) {
+                        url = url.replace(regexp, function (s0, s1, s2) {
+                            return s1 + s2 + new Date().getTime();
+                        });
+                        return url;
+                    } else {
+                        if (url.indexOf('?') > 0) {
+                            return url += '&' + param + '=' + new Date().getTime();
+                        } else {
+                            return url += '?' + param + '=' + new Date().getTime();
+                        }
+                    }
+
+                }
+
+                //setFDF
+                function setFDFfunction() {
+                    fdf = true;
+                    return fdf;
+                }
+
+                //creatFlash
+                function creatFlashfunction(murl, mt, url, width, height, fq, showurl, base, container, noshowurl, cURL) {
+                    // set click URL
+                    if (cURL !== "") clickURL = cURL;
+
+                    var str = "";
+                    if (mt) {
+                        str += "<font size='3'><a href='" + murl + "' target=\"_blank\">" + mt + "</a></font>";
+                    }
+                    str += "<div style='width:" + width + ";height:" + height + ";margin-top:3px;'>";
+                    str += "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' width=" + width + " height=" + height + " id='flashResult'>";
+                    str += "<param name='movie' value=" + url + ">";
+                    str += "<param name=FlashVars value=" + fq + ">";
+                    str += "<param name=base value=" + base + ">";
+                    str += "<param name='menu' value='false'>";
+                    str += "<param name='wmode' value='opaque'>";
+                    str += "<param name='allowfullscreen' value='false'>";
+                    str += "<param name='allowscriptaccess' value='always'>";
+                    str += "<embed FlashVars=" + fq + " src=" + addTimeStamp(url, 't') + " quality='high' pluginspage='http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' type='application/x-shockwave-flash' width=" + width + " height=" + height + " menu='false' allowfullscreen='false' allowscriptaccess='always' name='flashResult' wmode='opaque' base=" + base + " />";
+                    str += "</object></div>";
+
+                    if (!noshowurl) {
+                        str += "<span ><font color=\"#008000\"  size='-1'>" + showurl + "</font>&nbsp;-&nbsp;";
+                        str += "<a  class='op_LAMP' target=\"_blank\"  href=\"http://open.baidu.com/\"></a></span>";
+                    }
+
+                    if (container) {
+                        container.innerHTML = str;
+                    }
+                    else {
+                        document.write(str);
+                    }
+                }
+
+                //getVersion
+                function getVersion() {
+                    var n = navigator;
+                    if (n.plugins && n.mimeTypes.length) {
+                        var a = n.plugins["Shockwave Flash"];
+                        if (a && a.description) {
+                            return a.description.replace(/([a-zA-Z]|\s)+/, "").replace(/(\s)+r/, ".") + ".0";
+                        }
+                    } else if (window.ActiveXObject && !window.opera) {
+                        for (var i = 10; i >= 2; i--) {
+                            try {
+                                var c = new ActiveXObject('ShockwaveFlash.ShockwaveFlash.' + i);
+                                if (c) {
+                                    var version = c.GetVariable("$version");
+                                    version = version.replace(/WIN/g, '');
+                                    version = version.replace(/,/g, '.');
+                                    return version;
+                                    break;
+                                }
+                            } catch (e) {
+                                return "1.0.0";
+                            }
+                        }
+                    }
+                    return "1.0.0";
+                }
+
+                //hideFunction
+                function hidefunction(flashid, callback) {
+                    if (callback) {
+                        callback();
+                        return false;
+                    }
+                    var fid = flashid ? flashid : 'flash';
+                    var flash = document.getElementById(fid);
+                    try {
+                        var ft = al_c(flash);
+                        var ft = document.getElementById(ft);
+                        ft.style.display = "none";
+                    } catch (e) {
+                    }
+
+                }
+
+                //hidebrfunction
+                function hidebrfunction(id) {
+                    var flash_version = getVersion().split('.');
+                    var hasFlash = false;
+                    if (flash_version[0] > 9) hasFlash = true;
+                    if (flash_version[0] == 9 && flash_version[1] > 0) hasFlash = true;
+                    if (flash_version[0] == 9 && flash_version[1] == 0 && flash_version[2] >= 28)
+                        hasFlash = true;
+                    var fid = id ? id : 'flash';
+                    var flash = document.getElementById(fid);
+                    var ft = al_c(flash);
+                    var ft = document.getElementById(ft);
+                    var fb = ft.nextSibling;
+                    if (!hasFlash && (firstbr == true)) {
+                        fb.style.display = "none";
+                    }
+                    else if (!firstbr && (!fdf)) {
+                        fb.style.display = "none";
+                    }
+                    firstbr = false;
+                }
+
+                var swfVersion = (function () {
+                    var n = navigator;
+                    if (n.plugins && n.mimeTypes.length) {
+                        var plugin = n.plugins["Shockwave Flash"];
+                        if (plugin && plugin.description) {
+                            return plugin.description
+                                    .replace(/([a-zA-Z]|\s)+/, "")
+                                    .replace(/(\s)+r/, ".") + ".0";
+                        }
+                    } else if (window.ActiveXObject && !window.opera) {
+                        for (var i = 12; i >= 2; i--) {
+                            try {
+                                var c = new ActiveXObject('ShockwaveFlash.ShockwaveFlash.' + i);
+                                if (c) {
+                                    var version = c.GetVariable("$version");
+                                    return version.replace(/WIN/g, '').replace(/,/g, '.');
+                                }
+                            } catch (e) {
+                            }
+                        }
+                    }
+                })();
+                //checkflashversion
+                function checkflashversion(flashid, callback) {
+                    //var flash_version=getVersion().split('.');
+                    var version = swfVersion || '1.0.0';
+                    var flash_version = version.split('.');
+                    var hasFlash = false;
+                    if (!flash_version) {
+                        hasFlash = false;
+                    }
+                    else {
+                        if (flash_version[0] > 9) hasFlash = true;
+                        if (flash_version[0] == 9 && flash_version[1] > 0) hasFlash = true;
+                        if (flash_version[0] == 9 && flash_version[1] == 0 && flash_version[2] >= 28)
+                            hasFlash = true;
+                    }
+                    if (!hasFlash) {
+                        c({'fm': 'inlo', 'url': clickURL, 'p1': _this.p1, 'p2': 1, 'tp': "6"});
+                        hidefunction(flashid, callback);
+                    }
+                    else c({'fm': 'inlo', 'url': clickURL, 'p1': _this.p1, 'p2': 1, 'tp': "7"});
+                }
+
+                //checkfunction
+                function checkfunction() {
+
+                    if (fdf) {
+                        c({'fm': 'inlo', 'url': clickURL, 'p1': getFlashP1(), 'p2': 1, 'tp': "8"});
+                        return true;
+                    }
+                    else {
+                        c({'fm': 'inlo', 'url': clickURL, 'p1': getFlashP1(), 'p2': 1, 'tp': "9"});
+                        hidefunction();
+                        hidebrfunction();
+                    }
+                }
+
+                //return
+                return {
+                    hidebr: function (id) {
+                        hidebrfunction(id);
+                    },
+                    hide: function (id, callback) {
+                        hidefunction(id, callback);
+                    },
+                    checkflash: function (id, callback) {
+                        checkflashversion(id, callback);
+                    },
+                    check: function () {
+                        checkfunction();
+                    },
+                    creatFlash: function (murl, mt, url, width, height, fq, showurl, base, container, noshowurl) {
+                        creatFlashfunction(murl, mt, url, width, height, fq, showurl, base, container, noshowurl);
+                    },
+                    setFDF: function () {
+                        return setFDFfunction();
+                    }
+                };
+
+            })();
+            //flash.js end
+
+            if (weather4_twoicondata.swfon) {
+                var url = getProtocalUrl(weather4_twoicondata.url);
+                var swfon = weather4_twoicondata.swfon;
+                var swfoff = weather4_twoicondata.swfoff;
+                var $flashContainer = _this.find('.op_weather4_twoicon_flash');
+
+                var $open = _this.find('.op_weather4_twoicon_open').eq(0);
+                var $close = _this.find('.op_weather4_twoicon_close').eq(0);
+
+                var hideFlashContainer = function () {
+                    var $c = _this.find('.op_weather4_twoicon_swf_container').eq(0);
+                    if ($c.length > 0) {
+                        $c.hide();
+                    }
+                };
+                if ($flashContainer.html() == '') {
+                    var fq = 'fq=' + encodeURI(weather4_twoicondata.swfcondition) + '&from=baidu';
+                    var fdf;
+                    CF.checkflash('op_weather4_twoicon_flash', hideFlashContainer);
+                    CF.creatFlash(getProtocalUrl(weather4_twoicondata.url), '', getProtocalUrl(weather4_twoicondata.swfurl), '512', '385', fq, '', '', $flashContainer.get(0), 'noshowurl');
+                }
+
+                if ($open.length > 0 && $close.length > 0) {
+                    $open.on('click', function () {
+                        $close.css('display', 'inline-block');
+                        $open.hide();
+                        $flashContainer.show();
+                    });
+                    $close.on('click', function () {
+                        $open.show();
+                        $close.hide();
+                        $flashContainer.hide();
+
+                    });
+                }
+            }
+            var snows = [];
+            if (weather4_twoicondata.snowlevel && !$IE6) {
+                snowStopHover = true;
+                var snowlevel = weather4_twoicondata.snowlevel;
+
+                function initFn() {
+                    var snowNum = 55 - 18 * (3 - snowlevel),               //雪花总数
+                        r_con = _this.find('#content_right').get(0);         //右侧信息容器
+                    //雪花, index为在雪花数组snows[]中的索引
+                    var snow = function (index) {
+                        var screenWidth = document.documentElement.clientWidth || document.body.clientWidth,    //屏幕宽度
+                            screenHeight = document.documentElement.clientHeight || document.body.clientHeight, //屏幕高度
+                            scale = Math.random() * 1 - 0.3,                //飘落雪花放大缩小系数
+                            size = Math.ceil(16 * (1 + scale)),            //雪花尺寸
+                            snowX = Math.random() * (screenWidth - 100),      //雪花初始化X坐标
+                            snowY = 0,                                      //雪花初始化Y坐标
+                            speedX = 0,                                     //雪花X速度
+                            angleX = 0,                                     //雪花X角速度(正弦函数X增加)
+                            speedY = parseInt(snowlevel, 10) + Math.random() * 3,                 //Y速度
+                            amplitude = Math.random() * 3,                  //雪花正弦轨迹振幅
+                            opacity = 1,                                    //透明度
+                            img = null,                                     //雪花dom
+                            moveInterval = null,                            //雪花移动interval
+                            hideInterval = null,                            //雪花渐隐消失interval
+                            _this = this;
+                        if (Math.random() - 0.5 > 0) {                     //计算speedX, 随机正弦向左/向右
+                            speedX = (0.01 + Math.random() / 100);
+                        } else {
+                            speedX = -(0.01 + Math.random() / 100);
+                        }
+                        var draw = function () {         //画雪花dom
+                            img = document.createElement('img');
+                            var bgNum = Math.ceil(Math.random() * 100) % 100;//初始化4种雪花,第4种圆形最少
+                            if (bgNum > 95) {
+                                bgNum = 4;
+                            } else if (bgNum <= 95 && bgNum > 65) {
+                                bgNum = 3;
+                            } else if (bgNum <= 65 && bgNum > 35) {
+                                bgNum = 2;
+                            } else if (bgNum <= 35 && bgNum > 0) {
+                                bgNum = 1;
+                            } else {
+                                bgNum = 1;
+                            }
+                            var cssStyle = {
+                                'position': 'absolute',
+                                'zIndex': '10000000',
+                                'opacity': opacity,
+                                'width': (size + 'px'),
+                                'height': (size + 'px')
+                            };
+                            img.src = '//www.baidu.com/aladdin/img/weather4_twoicon/snowflake' + bgNum + '.png';
+                            for (var i in cssStyle) {
+                                if (cssStyle.hasOwnProperty(i)) {
+                                    img.style[i] = cssStyle[i];
+                                }
+                            }
+                            img.style.left = snowX + 'px';
+                            img.style.top = snowY + 'px';
+                            document.body.appendChild(img);
+                        };
+                        var move = function () { //雪花移动
+                            angleX += speedX;
+                            snowX = snowX + amplitude * Math.sin(angleX);
+                            snowY += speedY;
+                            var screenWNow = document.documentElement.clientWidth || document.body.clientWidth,
+                                screenHNow = document.documentElement.clientHeight || document.body.clientHeight;
+                            if (50 < snowX && snowX < (screenWNow - 50) && 0 < snowY && snowY < (screenHNow - 100)) {
+                                img.style.left = snowX + 'px';
+                                img.style.top = snowY + 'px';
+                            } else {    //屏幕外渐隐消失
+                                img.style.left = snowX + 'px';
+                                img.style.top = snowY + 'px';
+                                if (!hideInterval) {
+                                    hideInterval = setInterval(function () {  //渐隐
+                                        if (opacity >= 0) {
+                                            opacity -= 0.2;
+                                            img.style.opacity = opacity;
+                                        } else {
+                                            destory(); //销毁本雪花
+                                            snows[index] = new snow(index); //同时在创建一个雪花
+                                        }
+                                    }, 50);
+                                }
+                            }
+                        };
+                        var destory = this.destory = function () {    //销毁雪花
+                            clearInterval(hideInterval);
+                            clearInterval(moveInterval);
+                            if (img.parentNode) {
+                                img.parentNode.removeChild(img);
+                            }
+                            _this = null;
+                        };
+                        var init = function () {     //初始化雪花
+                            draw();
+                            moveInterval = setInterval(function () {
+                                move();
+                            }, 50)
+                        };
+                        init();
+                    };
+
+                    function initSnow() {    //初始化产生20个雪花, 每隔300ms再创建一个
+                        var initSnowNum = 10 + 3 * snowlevel;
+                        for (var i = 0; i < initSnowNum; i++) {
+                            snows[i] = new snow(i);
+                        }
+                        snowInterval = setInterval(function () {
+                            var snowCount = snows.length;
+                            if (snowCount < snowNum) {
+                                snows[snowCount] = new snow(snowCount);
+                            } else {
+                                clearInterval(snowInterval);
+                            }
+                        }, 300);
+                    }
+
+                    function initBtn() {    //关闭特效btn
+                        var $firstSnowBtn = _this.find('.op_weather4_twoicon_firstsnow_btn').eq(0),   //btn的dom
+                            $firstSnowDiv = _this.find('.op_weather4_twoicon_firstsnow').eq(0);       //btn的div容器
+                        if ($firstSnowBtn.length > 0) {
+                            $firstSnowDiv.show();
+                            $firstSnowBtn.on('click', function () {      //关闭特效
+                                snowStopHover = false;
+                                clearInterval(snowInterval);
+                                for (var i = 0; i < snowNum; i++) {
+                                    if (snows[i]) {
+                                        snows[i].destory();
+                                    }
+                                }
+                                $firstSnowDiv.hide();
+                                _this.find('.op_weather4_twoicon_snowtop').eq(0).hide();
+                            });
+                        }
+                    }
+
+                    initBtn();
+                    initSnow();
+                }
+
+                initFn();
+            }
+
+            // 城市
+            var query = weather4_twoicondata.oq;
+            if (query.indexOf("天气") < 0)return;//用户query包含“天气”并且出现的天气ala结果才存储key
+
+            A.use('localstorage', function () {
+                //使用localstorage组件，添加最近访问城市
+                var storage = A.ui.localstorage({
+                    fileName: 'bd_weather_city',
+                    expiresDay: 30
+                });
+                storage.init();
+
+                var curCity = weather4_twoicondata.fetchkey.split(weather4_twoicondata.resourceid + '_')[1]; //当前城市
+                curCity = (curCity.indexOf('天气') < 0 ) ? curCity + '天气' : curCity; //当fetchkey中没有“天气”时，为它加上
+                var localStorElem = _this.qq('op_weather4_twoicon_u'); //获取展示的elem
+
+                weatherHis(1); //默认显示1条城市信息
+                function wencodeHTML(source) {//对目标字符串进行html编码
+                    return String(source)
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#39;");
+                };
+                function weatherHis(cityNum) {
+                    var cityStorage = storage.get('op_weather4_twoicon_city');
+                    var storageMax = cityNum;
+                    var cityList = (!cityStorage) ? new Array() : unescape(cityStorage).split(';'); //城市列表
+                    //移除当前城市
+                    for (var i = 0, j = 0; i < cityList.length; i++) {
+                        if (cityList[i] == curCity || j == 99) {  //存储100条城市天气信息
+                            cityList.splice(i, 1);
+                        } else {
+                            j++;
+                        }
+                    }
+                    //打印最近访问城市
+                    if (cityList && cityList.length > 0) {
+                        for (var j = 0; j < storageMax; j++) {
+                            var cityA = document.createElement('a');
+                            var url = "//www.baidu.com/s?wd=" + encodeURIComponent(cityList[j]) + "&ie=utf-8";
+                            var cityName = document.createTextNode(wencodeHTML(cityList[j]));
+                            cityA.appendChild(document.createTextNode(wencodeHTML(cityList[j])));
+                            //cityA.innerHTML=wencodeHTML(cityList[j]);
+                            //T.insertHTML(cityA,'beforeEnd',cityName);
+                            cityA.href = url;
+                            cityA.target = '_blank';
+                            cityA.className = 'OP_LOG_LINK';
+                            localStorElem.appendChild(cityA);
+                            //T.insertHTML(localStorElem,'beforeEnd',cityA);
+                        }
+                        localStorElem.style.display = 'inline';
+                        c({'fm': 'inlo', rsv_wct: 1});
+                    }
+
+                    var setStorige = cityList.length > 0 ? curCity + ';' + cityList.join(';') : curCity;
+                    storage.set('op_weather4_twoicon_city', escape(setStorige));
+                }
+            });
+
+            this.dispose = function () {
+                if (snows.length > 1) {
+                    for (var i = 0; i < snows.length; i++) {
+                        snows[i].destory();
+                    }
+                }
+                clearTimeout(tid);
+                clearTimeout(wtimer);
+                clearInterval(snowInterval);
+                clearInterval(hideInterval);
+                clearInterval(moveInterval);
+                scene && scene.dispose && scene.dispose();
+            };
+        });
+
+    </script>
+    <script>A.setup(function () {
+        function wdfl(canvas, appendo, fswd, flfx, fl) {
+            function line(x, y, i) {
+                if (11 == i && dataXY[11].novalue) ctx.lineTo(480, y); else ctx.lineTo(x, y)
+            }
+
+            function createCanvas(appendo, w, h, l, t, i, flfn) {
+                var op_weather4_xlqyyc = document.createElement("div");
+                op_weather4_xlqyyc.className = "op_weather4_xlqyyc", op_weather4_xlqyyc.style.left = i * divide + "px", op_weather4_xlqyyc.style.width = divide + "px", appendo.appendChild(op_weather4_xlqyyc);
+                var yc = document.createElement("div");
+                if (yc.className = "op_weather4_yuandian", yc.style.position = "absolute", yc.style.width = w + "px", yc.style.height = h + "px", yc.style.left = l - w / 2 + "px", yc.style.top = t - h / 2 + "px", !fl) yc.style.backgroundPosition = "0 3px"; else {
+                    var posiXY = 8 == flfn ? "2px 3px" : "0 -" + (20 * flfn + 27) + "px";
+                    yc.style.backgroundPosition = posiXY
+                }
+                return op_weather4_xlqyyc.appendChild(yc), op_weather4_xlqyyc
+            }
+
+            function creatfont(appendo, w, h, l, t, c) {
+                if (!c) c = "";
+                var ft = document.createElement("div");
+                if (ft.className = "op_weather4_xllefts", ft.style.position = "absolute", fl) ft.style.width = "42px";
+                ft.style.left = l - w / 2 - 13 + "px", ft.style.top = t - h / 2 - 13 + "px";
+                var unit = fl ? "" : "°C";
+                return ft.innerHTML = c + unit, appendo.appendChild(ft), ft
+            }
+
+            function ceartArc(appendo, w, h, l, t, c, i, flfx, flfl, flfs, flfn) {
+                var canvas = createCanvas(appendo, w, h, l, t, i, flfn);
+                if (creatfont(canvas, w, h, l, t, c), fl) xltip(canvas, 100, 108, l - 50, "<p>风向：" + (flfx ? flfx : "无") + "</p><p>风力：" + flfl + "</p>");
+                canvas.onmousemove = function (ev) {
+                    if (!fl) editArc(this.children[0], w + 4, h + 4, l, t, "0 -7px");
+                    if (fl) this.children[2].style.display = "block"
+                }, canvas.onmouseout = function (ev) {
+                    if (!fl) editArc(this.children[0], w, h, l, t, "0 3px");
+                    if (fl) this.children[2].style.display = "none"
+                }
+            }
+
+            function editArc(o, w, h, l, t, xy) {
+                o.style.width = w + "px", o.style.height = h + "px", o.style.left = l - w / 2 + 1 + "px", o.style.top = t - h / 2 - 1.5 + "px", o.style.backgroundPosition = xy
+            }
+
+            function moveArea(mouseX) {
+                for (var i = 0; i < 12; i++)if (mouseX >= i * divide && mouseX < i * divide + divide)return i
+            }
+
+            function clearCanvas(w, h) {
+                ctx.clearRect(0, 0, w, h)
+            }
+
+            function ctxDraw(appendo) {
+                if (ctx.strokeStyle = "rgba(255,255,255,0.2)", ctx.save(), ctx.beginPath(), !fl) ctx.moveTo(startXY.x, 86 - startXY.y - .5);
+                else if (dataXY[0].novalue) {
+                    for (var i = 0; i < dataXY.length; i++)if (!dataXY[i].novalue) {
+                        ctx.moveTo(0, 86 - dataXY[i].y - .5);
+                        break
+                    }
+                } else ctx.moveTo(20, 86 - dataXY[0].y - .5);
+                ctx.strokeStyle = "#FFFFFF", ctx.lineWidth = 1;
+                for (var range = 1 === fl ? 9 : 9, i = 0; i < dataXY.length; i++) {
+                    if (i < range)if (!dataXY[i].novalue)var x = (dataXY[i].id - 1) * divide + 18,
+                        y = 86 - dataXY[i].y - 1, lasty = y; else var y = lasty; else var x = dataXY[i].x,
+                        y = 86 - dataXY[i].y;
+                    if (line(x, y, i), i < range && !fl && !dataXY[i].novalue) ceartArc(appendo, 14, 14, 20, 86 - dataXY[i].y, dataXY[i].yw, i);
+                    if (i < range && fl && !dataXY[i].novalue) ceartArc(appendo, 14, 14, 20, 86 - dataXY[i].y, dataXY[i].s, i, dataXY[i].f, dataXY[i].fl, dataXY[i].s, dataXY[i].fn)
+                }
+                if (ctx.stroke(), !fl) ctx.fillStyle = "rgba(255,255,255,0.1)", ctx.fill(), ctx.closePath();
+                ctx.restore();
+                for (var i = 0; i < 5; i++) {
+                    ctx.beginPath();
+                    var y = 17 * (i + 1) + .5;
+                    ctx.moveTo(0, y), ctx.lineTo(480, y), ctx.stroke()
+                }
+            }
+
+            for (var op_weather4_xlCanvas = canvas, ctx = op_weather4_xlCanvas.getContext("2d"), divide = 1 === fl ? 56 : 56, i = 0; i < fswd.length; i++)if (!fswd[i].novalue) {
+                var startXY = {x: 0, y: fswd[i].y};
+                break
+            }
+            var dataXY = [];
+            if (dataXY = !fl ? fswd : flfx, !fl) dataXY[9] = {
+                id: 9,
+                x: 490,
+                y: dataXY[dataXY.length - 1].y,
+                yw: 0
+            }, dataXY[10] = {id: 10, x: 490, y: 0, yw: 0}, dataXY[11] = {id: 11, x: 0, y: 0, yw: 0};
+            ctxDraw(appendo)
+        }
+
+        function xltip(appendo, w, t, l, html, xgzs) {
+            var tip = document.createElement("div");
+            tip.className = "op_weather4_xltip", tip.style.width = w + "px", tip.style.top = t + "px", tip.style.left = l + "px", tip.style.zIndex = "1000", tip.style.display = "none", appendo.appendChild(tip);
+            var tipico = document.createElement("span");
+            tipico.className = "op_weather4_xlico";
+            var leftD = xgzs ? 35 : 75;
+            tipico.style.left = l + leftD + "px", tip.appendChild(tipico);
+            var tipcon = document.createElement("div");
+            return tipcon.className = "op_weather4_xlcont", tipcon.innerHTML = html, tip.appendChild(tipcon), tip
+        }
+
+        function setString(str, len) {
+            if (2 * str.length <= len)return str;
+            for (var strlen = 0, newstr = "", i = 0; i < str.length; i++) {
+                if (str.charCodeAt(i) > 128) {
+                    if (strlen += 2, strlen > len)return newstr.substring(0, newstr.length - 1) + "..."
+                } else if (strlen += 1, strlen > len)return newstr.substring(0, newstr.length - 2) + "...";
+                newstr += str.charAt(i)
+            }
+            return newstr
+        }
+
+        function xgzhsli(o, i) {
+            var xlbornone = i > 3 ? " op_weather4_xlbornone" : "", li = document.createElement("li"),
+                div = document.createElement("div"), xlxgzhtop = _this.find(".op_weather4_xltop").eq(0);
+            li.className = "op_weather4_xlzs" + xlbornone, li.style.position = "relative", li.style.zIndex = 6 - i, xlxgzhtop.append(li), div.className = "op_weather4_xlzstit", div.innerHTML = o.title + "：" + o.zs, li.appendChild(div);
+            var xgzhtip = xltip(li, 335, 27, 0, '<div class="op_weather4_xltiptitle">' + o.tipt + "：" + o.zs + '</div><div class="op_weather4_xltipcontent">' + o.des + "</div>", 1);
+            return $(li).on("mouseover", function () {
+                xgzhtip.style.display = "block"
+            }), $(li).on("mouseout", function () {
+                xgzhtip.style.display = "none"
+            }), li
+        }
+
+        function xgzhs(data) {
+            var ul = "";
+            return $.each(data, function (i, o) {
+                ul += xgzhsli(o, i)
+            }), ul
+        }
+
+        function xyValue(fswdaxes) {
+            for (var ymax = fswdaxes.ymax, ydif = (ymax - fswdaxes.ymin) / 4, strLi = "", i = 0; i < 5; i++) {
+                var livalue = ymax - i * ydif;
+                strLi += "<li>" + livalue + "</li>"
+            }
+            return strLi
+        }
+
+        function jslUl(jsl) {
+            for (var strLi = "", i = 0; i < jsl.length; i++) {
+                var time = jsl[i].t.replace(":00", "点"),
+                    percentage = Math.ceil(jsl[i].p) < 11 ? Math.ceil(jsl[i].p) : 10,
+                    novalueJsl = jsl[i].novalue ? " op_weather4_jslNovalue" : "", noJsl = jsl[i].novalue ? "--" : "";
+                strLi += "<li><span>" + (0 === i ? "现在" : time.substr(11, 2) + "点") + '</span><div class="op_weather4_jsico"><span class="op_weather4_jsiconborw' + percentage + novalueJsl + '">' + noJsl + '</span></div><span class="op_weather4_jsml">' + jsl[i].p + "mm</span></li>"
+            }
+            return strLi
+        }
+
+        var _this = this, weather4_twoicondata = _this.data.weather4_twoicondata,
+            XLIE6 = !!window.ActiveXObject && !window.XMLHttpRequest,
+            browserIE = /msie (\d+\.\d+)/i.test(navigator.userAgent) ? document.documentMode || +RegExp.$1 : void 0,
+            originQuery = weather4_twoicondata.originQuery, srcid = weather4_twoicondata.srcid, fswd = null,
+            flfx = null, xgzs = null, fswdaxes = null, flfxaxes = null, jsl = null,
+            warH = weather4_twoicondata.warn ? 36 : 0, xlHClose = 32, xlHOpen = 174, H = 250;
+        if (weather4_twoicondata.folder && !XLIE6) {
+            var tab = _this.find(".op_weather4_xltab:first li"), xlopen = _this.find(".op_weather4_xlopen").eq(0),
+                xlclose = _this.find(".op_weather4_xlclose").eq(0),
+                xltabcontent = _this.find(".op_weather4_xltabcontent").eq(0),
+                xltwoiconBg = _this.find(".op_weather4_twoicon_bg"),
+                xltwoicon = _this.find(".op_weather4_twoicon").eq(0), tabActive = tab.eq(0),
+                content = _this.find(".op_weather4_xlcon"), xlbgie = _this.find(".op_weather4_twoicon_bgie"),
+                jslulDom = _this.find(".op_weather4_jslul").eq(0), tabContent = content[0], tab2 = 0, tabAjax = 0;
+            if (_this.find(".op_weather4_twoicon_wlink").css({"margin-top": 0}), browserIE && xlbgie.length > 0) xlbgie.each(function (i, o) {
+                o.style.height = 132 + warH - 20 + "px"
+            });
+            if (xlclose.length > 0) xlclose.on("click", function () {
+                if (xltwoiconBg.each(function (i, o) {
+                        o.style.height = H + xlHClose + warH + "px"
+                    }), browserIE && xlbgie.length > 0) xlbgie.each(function (i, o) {
+                    o.style.height = 132 + warH - 20 + "px"
+                });
+                xltabcontent.css("display", "none"), xltwoicon.css("height", H + xlHClose), xlopen.css("display", "block"), xlclose.css("display", "none")
+            });
+            if (xlopen.length > 0) {
+                _this.find(".op_weather4_xlleftfswd").html(""), _this.find(".op_weather4_xlleftflfx").html(""), jslulDom.html("");
+                var _data = _this.data.weather4_twoicondata;
+                fswd = $.parseJSON(_data.fswdi), flfx = $.parseJSON(_data.flfxi), xgzs = $.parseJSON(_data.xgzs), fswdaxes = $.parseJSON(_data.fswdiaxes)[0], flfxaxes = $.parseJSON(_data.flfxiaxes)[0], jsl = $.parseJSON(_data.jsli), tabAjax = 1;
+                var currentTime, nextTime;
+                if (currentTime = new Date(fswd[0].t), nextTime = new Date(fswd[1].t), nextTime.valueOf() - currentTime.valueOf() <= 9e5) fswd.splice(1, 1), flfx.splice(1, 1), jsl.splice(1, 1);
+                fswd = fswd.slice(0, 9), flfx = flfx.slice(0, 9), jsl = jsl.slice(0, 9);
+                for (var i = 0; i < fswd.length; i++)fswd[i].id = flfx[i].id = jsl[i].id = i + 1;
+                if (browserIE) A.use("canvas", function () {
+                    if (!document.createElement("canvas").getContext) A.ui.canvas.init([_this.find(".op_weather4_xlCanvas1").get(0), _this.find(".op_weather4_xlCanvas2").get(0)]);
+                    wdfl(_this.find(".op_weather4_xlCanvas1").get(0), _this.find(".op_weather4_xlCanvascon1").get(0), fswd, flfx), wdfl(_this.find(".op_weather4_xlCanvas2").get(0), _this.find(".op_weather4_xlCanvascon2").get(0), fswd, flfx, 1), content[1].style.display = "none"
+                }); else wdfl(_this.find(".op_weather4_xlCanvas1").get(0), _this.find(".op_weather4_xlCanvascon1").get(0), fswd, flfx), wdfl(_this.find(".op_weather4_xlCanvas2").get(0), _this.find(".op_weather4_xlCanvascon2").get(0), fswd, flfx, 1), content[1].style.display = "none";
+                if (_this.find(".op_weather4_xlleftfswd").html(xyValue(fswdaxes)), _this.find(".op_weather4_xlleftflfx").html(xyValue(flfxaxes)), jslulDom.html(jslUl(jsl)), tab.bind("click", function () {
+                        var i = tab.index(this);
+                        if (3 == i) {
+                            var xlxgzhtop = _this.find(".op_weather4_xltop").eq(0);
+                            xlxgzhtop.html(""), xgzhs(xgzs)
+                        }
+                        tabActive.removeClass("op_weather4_xlactive"), tabActive = $(this), tabActive.addClass("op_weather4_xlactive"), tabContent.style.display = "none", tabContent = content[i], tabContent.style.display = "block"
+                    }), xltwoiconBg.each(function (i, o) {
+                        o.style.height = H + xlHOpen - 20 + warH + "px"
+                    }), browserIE && xlbgie.length > 0) xlbgie.each(function (i, o) {
+                    o.style.height = H + xlHClose + warH - 28 + "px"
+                });
+                xltabcontent.css("display", "block"), xltwoicon.css("height", H + xlHOpen - 20), xlopen.css("display", "none"), xlclose.css("display", "block")
+            }
+        } else if (weather4_twoicondata.folder && XLIE6) _this.find(".op_weather4_xiala").css("display", "none"), _this.find(".op_weather4_twoicon").css("height", H), _this.find(".op_weather4_twoicon_bg").each(function (i, o) {
+            o.style.height = H + warH + "px"
+        })
+    });</script>
+
+
+    <div class="c-gap-top c-recommend" style="display: none;"><i
+            class="c-icon c-icon-bear-circle c-gap-right-small"></i><span class="c-gray">为您推荐：</span><a class=""
+                                                                                                        href="/s?tn=59046333_1_dg&amp;wd=北京pm2.5未来7天预测&amp;rsv_crq=6&amp;bs=中国天气网"
+                                                                                                        title="北京pm2.5未来7天预测"
+                                                                                                        target="_blank">北京pm2.5未来7天预测</a><a
+            class="c-gap-left-large" href="/s?tn=59046333_1_dg&amp;wd=一周空气质量&amp;rsv_crq=6&amp;bs=中国天气网" title="一周空气质量"
+            target="_blank">一周空气质量</a><a class="c-gap-left-large"
+                                         href="/s?tn=59046333_1_dg&amp;wd=美国大使馆pm2.5实时查询&amp;rsv_crq=6&amp;bs=中国天气网"
+                                         title="美国大使馆pm2.5实时查询" target="_blank">美国大使馆pm2.5实时查询</a></div>
+    <span class="rrecom-btn-parent rrecom-btn-s" style="opacity: 1; right: -54px;"><span class="rrecom-btn"
+                                                                                         style="display: none;"><span></span></span></span>
+</div>
+</body>
+</html>
