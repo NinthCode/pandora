@@ -9,7 +9,11 @@ router.get('/', function(req, res, next) {
 
 router.post('/pushWelcome', function(req, res, next) {
     if(req.body.key == 'python') {
-        io.broadcast('welcome', req.body.name);
+        var welcome = {
+            type: 'come',
+            msg: req.body.name
+        }
+        io.broadcast('welcome', JSON.stringify(welcome));
         res.send('OK');
     } else {
         res.send('error');
@@ -18,7 +22,11 @@ router.post('/pushWelcome', function(req, res, next) {
 
 router.post('/pushUnlock', function(req, res, next) {
     if(req.body.key == 'python') {
-        io.broadcast('byby', '拜拜，祝你好运！');
+        var welcome = {
+            type: 'go',
+            msg: '拜拜，祝你好运！'
+        }
+        io.broadcast('welcome', JSON.stringify(welcome));
         res.send('OK');
     } else {
         res.send('error');

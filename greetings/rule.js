@@ -2,7 +2,7 @@
 * @Author: Nicot
 * @Date:   2018-01-03 00:25:31
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-04 20:26:37
+* @Last Modified time: 2018-01-07 15:28:56
 */
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
     connect: [
         {
             expression: 'true',
-            characters: ['你好啊，很高兴见到你！', '你来啦~', '恭喜您成功连接系统'],
+            characters: ['很高兴见到你！', '你来啦~', '恭喜您成功连接系统'],
             level: -1
         }
     ],

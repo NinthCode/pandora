@@ -14,6 +14,7 @@ var io = require('../socketio/io.js');
 var cj = require('../job/runCameraJob.js');
 var nj = require('../job/newsJob.js');
 var config = require('../config/config.js');
+var gj = require('../job/greetingJob.js');
 
 /**
  * Get port from environment and store in Express.
@@ -34,11 +35,12 @@ cache.set('io', socketIO);
 io.start();
 
 //初始化Job
-wj.start(config.city);
+wj.start();
 if(config.camera) {
   cj.start();
 }
 nj.start();
+gj.start();
 
 /**
  * Listen on provided port, on all network interfaces.

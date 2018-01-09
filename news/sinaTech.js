@@ -2,7 +2,7 @@
 * @Author: Nicot
 * @Date:   2018-01-01 15:34:18
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-01 16:56:59
+* @Last Modified time: 2018-01-07 14:15:15
 */
 
 var request = require('request');
@@ -23,7 +23,7 @@ exports.run = function() {
                                 title: temp.text().trim(),
                                 abstract: '',
                                 time: '',
-                                type: 'sina-tech'
+                                type: '新浪科技新闻'
                             });
                         } catch(ee) {
                             console.log(ee);

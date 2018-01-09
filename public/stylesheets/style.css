@@ -59,20 +59,18 @@ body {
     position: absolute;
     text-align: center;
     top: 85%;
-    margin-right: 10%;
+    width: 90%;
 }
 
-h1.title {
+.title {
     color: #ffffff;
-    float: center;
     text-align: center;
     font-weight: 700;
     font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-p.abstract {
+.abstract {
     color: #ffffff;
-    float: center;
     text-align: center;
     font-weight: 900;
     font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;

@@ -2,7 +2,7 @@
 * @Author: Nicot
 * @Date:   2018-01-01 14:19:45
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-01 16:58:50
+* @Last Modified time: 2018-01-07 14:21:05
 */
 
 var request = require('request');
@@ -23,13 +23,13 @@ exports.run = function() {
                             title: temp('.title').text().trim(),
                             abstract: temp('.sc').text().trim(),
                             time: temp('.mr').text().trim(),
-                            type: 'osc'
+                            type: 'OSChina新闻'
                         });
                     } catch(ee) {
                         console.log(ee);
                     }
                 }
-                cache.get('news').push({news: osNews, length: spans.length, iter: 0});
+                cache.get('news').push({news: osNews, length: osNews.length, iter: 0});
             } catch(e) {
                 console.log('get osc news error' + e);
             }

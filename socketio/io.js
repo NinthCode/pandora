@@ -2,10 +2,11 @@
 * @Author: Nicot
 * @Date:   2017-12-24 11:45:58
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-03 00:43:49
+* @Last Modified time: 2018-01-07 15:22:38
 */
 var cache = require('../util/cacheUtil.js');
 var news = require('../news/news.js');
+var greeting = require('../greetings/greetings.js');
 
 exports.start = function() {
     var io = cache.get('io');
@@ -25,7 +26,7 @@ exports.start = function() {
             //更新新闻
             socket.emit('news', JSON.stringify(news.getNews()));
             //更新欢迎语
-            socket.emit('welcome', '很高兴见到你！');
+            socket.emit('welcome', JSON.stringify(greeting.getGreeting('connect')));
         });
     });
 };

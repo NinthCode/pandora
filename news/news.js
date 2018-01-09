@@ -2,12 +2,13 @@
 * @Author: Nicot
 * @Date:   2018-01-01 14:45:57
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-01 16:53:28
+* @Last Modified time: 2018-01-07 14:24:41
 */
 var random = require('../util/randomUtil.js');
 var cache = require('../util/cacheUtil.js');
 var oschina = require('../news/osChina.js');
 var sinaTech = require('../news/sinaTech.js');
+var hisToday = require('../news/hisToday.js');
 
 exports.getNews = function() {
     if(cache.get('news').length != 0) {
@@ -26,9 +27,8 @@ exports.getNews = function() {
 }
 
 exports.run = function() {
-    if(cache.get('news') == undefined) {
-        cache.set('news', []);
-    }
+    cache.set('news', []);
     oschina.run();
     sinaTech.run();
+    hisToday.run();
 }

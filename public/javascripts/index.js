@@ -2,7 +2,7 @@
 * @Author: Nicot
 * @Date:   2016-03-29 23:12:03
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-03 00:20:21
+* @Last Modified time: 2018-01-09 20:50:36
 */
 
 //落日时间
@@ -34,21 +34,22 @@ jQuery(document).ready(function() {
     socket.on('welcome', function(msg) {
         var welcome = document.getElementById('welcome');
         var date = new Date();
-        if(date.getHours() >= sr.srh && date.getHours() < 9) {
-            welcome.innerText = '早上好，' + msg + '，开心快乐每一天哦！';
-        } else if(date.getHours() >= 12 && date.getHours() < ss.ssh) {
-            welcome.innerText = '下午好，' + msg + '^_^';
-        } else if(date.getHours() >= 9 && date.getHours() < 12) {
-            welcome.innerText = '上午好，' + msg + '^_^';
+        console.log(msg);
+        var welcomeMsg = JSON.parse(msg);
+        if(welcomeMsg.type == 'come' || welcomeMsg.type == 'connect') {
+            if(date.getHours() >= sr.srh && date.getHours() < 9) {
+                welcome.innerText = '早上好，' + welcomeMsg.msg + '，开心快乐每一天哦！';
+            } else if(date.getHours() >= 12 && date.getHours() < ss.ssh) {
+                welcome.innerText = '下午好，' + welcomeMsg.msg + '^_^';
+            } else if(date.getHours() >= 9 && date.getHours() < 12) {
+                welcome.innerText = '上午好，' + welcomeMsg.msg + '^_^';
+            } else {
+                welcome.innerText = '晚上好，' + welcomeMsg.msg + '^_^';
+            }
         } else {
-            welcome.innerText = '晚上好，' + msg + '^_^';
+             welcome.innerText = welcomeMsg.msg;
         }
         
-    });
-
-    socket.on('byby', function(msg) {
-        var welcome = document.getElementById('welcome');
-        welcome.innerText = msg;
     });
 
     socket.on('weather', function(msg) {
@@ -59,7 +60,7 @@ jQuery(document).ready(function() {
         var title = document.getElementById('title');
         var abstract = document.getElementById('abstract');
         var news = JSON.parse(msg);
-        title.innerText = news.title;
+        title.innerText = '[' + news.type + ']' + news.title;
         abstract.innerText = news.abstract == '' ? '' : news.abstract.substring(0, 100) + '...';
     });
 });
@@ -85,7 +86,9 @@ jQuery(document).ready(function() {
         var clockhm = doc.getElementById('clock-hm');
         var clocksec = doc.getElementById('clock-sec');
         var clockdate = doc.getElementById('clock-date');
-        clockdate.innerText = "星期"  + new Date().getDay() + " , " + new Date().Format("yyyy年MM月dd日");
+        var weekArr = ['一', '二', '三', '四', '五', '六', '日'];
+        var week = weekArr[new Date().getDay()];
+        clockdate.innerText = new Date().Format("yyyy年MM月dd日") + " " + "星期"  + week;
         clockhm.innerText = new Date().Format("HH:mm");
         clocksec.innerText = new Date().Format("ss");
     }

@@ -2,7 +2,7 @@
 * @Author: Nicot
 * @Date:   2017-12-24 01:13:50
 * @Last Modified by:   Nicot
-* @Last Modified time: 2018-01-01 10:07:50
+* @Last Modified time: 2018-01-07 15:41:02
 */
 
 var schedule = require('node-schedule');
@@ -12,7 +12,8 @@ var cache = require('../util/cacheUtil.js');
 var util = require('util');
 var io = require('../socketio/io.js')
 
-exports.start = function(address) {
+exports.start = function() {
+    address = config.city;
     console.log('init weather job start');
     updateNowWeather(address);
     updateTodayWeather(address);
@@ -23,7 +24,7 @@ exports.start = function(address) {
         updateNowWeather(address);
     });
 
-    //每一个小时更新一次今日天气
+    //每12小时更新一次今日天气
     var rule12hour = new schedule.RecurrenceRule();
     rule12hour.hour = [0, 12];
     var job2 = schedule.scheduleJob(rule12hour, function(){
